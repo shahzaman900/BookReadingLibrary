@@ -14,10 +14,13 @@ function App() {
 		fetchBooks();
 	}, []);
 
-	const updateBookById = (id, newTitle) => {
+	const updateBookById = async (id, newTitle) => {
+		const responce = await axios.put(`http://127.0.0.1:3001/books/${id}`, {
+			title: newTitle,
+		});
 		const updatedBooks = books.map((book) => {
 			if (book.id === id) {
-				return { ...book, title: newTitle };
+				return { ...book, ...responce.data };
 			}
 			return book;
 		});
@@ -25,7 +28,8 @@ function App() {
 		setBooks(updatedBooks);
 	};
 
-	const deleteBookById = (id) => {
+	const deleteBookById = async (id) => {
+		await axios.delete(`http://127.0.0.1:3001/books/${id}`);
 		const updateBooks = books.filter((book) => book.id !== id);
 		setBooks(updateBooks);
 	};

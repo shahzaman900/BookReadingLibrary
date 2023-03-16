@@ -1,0 +1,29 @@
+# Get All Books
+GET http://127.0.0.1:3001/books HTTP/1.1
+Content-Type: application/json
+
+###
+
+# Create a book
+POST http://127.0.0.1:3001/books HTTP/1.1
+Content-Type: application/json
+
+{
+   "title": "Shah ZAman"
+}
+
+###
+
+# update a book
+PUT http://127.0.0.1:3001/books/1 HTTP/1.1
+Content-Type: application/json
+
+{
+   "title": " ZAman"
+}
+
+###
+
+# Delete a book
+DELETE http://127.0.0.1:3001/books/1 HTTP/1.1
+Content-Type: application/json

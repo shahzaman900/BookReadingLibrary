@@ -5,15 +5,16 @@ import BookList from "./Components/BookList";
 function App() {
 	let [books, setBooks] = useState([]);
 
+	// ////////////////////// Load Books ////////////////
 	const fetchBooks = async () => {
 		const responce = await axios.get("http://127.0.0.1:3001/books");
 		setBooks(responce.data);
 	};
-
 	useEffect(() => {
 		fetchBooks();
 	}, []);
 
+	// ////////////////////// Update Book ////////////////
 	const updateBookById = async (id, newTitle) => {
 		const responce = await axios.put(`http://127.0.0.1:3001/books/${id}`, {
 			title: newTitle,
@@ -28,12 +29,14 @@ function App() {
 		setBooks(updatedBooks);
 	};
 
+	// ////////////////////// Delete Book ////////////////
 	const deleteBookById = async (id) => {
 		await axios.delete(`http://127.0.0.1:3001/books/${id}`);
 		const updateBooks = books.filter((book) => book.id !== id);
 		setBooks(updateBooks);
 	};
 
+	// ////////////////////// Book Creation////////////////
 	const createBook = async (title) => {
 		const responce = await axios.post("http://127.0.0.1:3001/books", {
 			title,
